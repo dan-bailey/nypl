@@ -17,8 +17,8 @@ function updateDisplay(loc, citycode, cond, icon, temp, hi, lo, alertText, smarm
     document.getElementById("location").innerText = loc;
     document.getElementById("conditions").innerText = cond;
     // image icon
-    document.getElementById("temp").innerText = temp + "&deg;F";
-    document.getElementById("hilo").innerText = hi + "&deg;F &#149; " + lo + "&deg;F";
+    document.getElementById("temp").innerText = temp + "ºF";
+    document.getElementById("hilo").innerText = "High: " + hi + "ºF • Low: " + lo + "ºF";
     document.getElementById("alert").innerText = alertText;
     document.getElementById("smarmy").innerText = smarmyText;
 }
