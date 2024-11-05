@@ -1,35 +1,25 @@
-const latitude = position.coords.latitude;
-const longitude = position.coords.longitude;
-console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+// get the latitude and longitude from the browser
 
-function geoFindMe() {
-    const status = document.querySelector("#status");
-    const mapLink = document.querySelector("#map-link");
-  
-    mapLink.href = "";
-    mapLink.textContent = "";
-  
-    function success(position) {
-      const latitude = position.coords.latitude;
-      const longitude = position.coords.longitude;
-  
-      status.textContent = "";
-      mapLink.href = `https://www.openstreetmap.org/#map=18/${latitude}/${longitude}`;
-      mapLink.textContent = `Latitude: ${latitude} °, Longitude: ${longitude} °`;
-    }
-  
-    function error() {
-      status.textContent = "Unable to retrieve your location";
-    }
-  
-    if (!navigator.geolocation) {
-      status.textContent = "Geolocation is not supported by your browser";
-    } else {
-      status.textContent = "Locating…";
-      navigator.geolocation.getCurrentPosition(success, error);
-    }
-  }
+// get the place name from the OpenStreetMap API
+
+// get the weather from the NOAA API
+
 
 function FahrenheitToCelsius(fahrenheit) {
   return (fahrenheit - 32) * 5 / 9;
 }
+
+function updateDisplay(loc, citycode, cond, icon, temp, hi, lo, alertText, smarmyText) {
+    // update the display with the new data
+    // use innerText instead of innerHTML to avoid XSS attacks
+    var img = document.getElementById("icon");
+    img.src = "./img/svg/" + icon + ".svg";
+    document.getElementById("location").innerText = loc;
+    document.getElementById("conditions").innerText = cond;
+    // image icon
+    document.getElementById("temp").innerText = temp + "&deg;F";
+    document.getElementById("hilo").innerText = hi + "&deg;F &#149; " + lo + "&deg;F";
+    document.getElementById("alert").innerText = alertText;
+    document.getElementById("smarmy").innerText = smarmyText;
+}
+
