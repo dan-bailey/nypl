@@ -1,5 +1,14 @@
 // get the latitude and longitude from the browser
-
+const successCallback = (position) => {
+    console.log(position);
+};
+  
+const errorCallback = (error) => {
+    console.log(error);
+};
+  
+var grid = navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+console.log(grid);
 // get the place name from the OpenStreetMap API
 
 // get the weather from the NOAA API

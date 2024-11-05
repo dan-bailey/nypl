@@ -28,22 +28,20 @@
                 <a href="#" id="indianapolis" class="mt-2 p-4 inline-block text-white font-bold rounded-md hover:bg-black hover:bg-opacity-30">Indianapolis</a>
         </nav>
         <main>
-            <div id="location" class="w-2/3 md:w-1/3 mx-auto p-4 my-4 bg-black rounded-lg bg-opacity-50 backdrop-blur-md text-center text-white text-2xl font-notosans">Location Name</div>
-            <div class="w-2/3 md:w-1/3 mx-auto p-4 my-4 bg-black rounded-lg bg-opacity-50 backdrop-blur-md text-center text-white font-notosans">
+            <div id="location" class="w-2/3 lg:w-1/3 mx-auto p-4 my-4 bg-black rounded-lg bg-opacity-50 backdrop-blur-md text-center text-white text-2xl font-notosans">Location Name</div>
+            <div class="w-2/3 lg:w-1/3 mx-auto p-4 my-4 bg-black rounded-lg bg-opacity-50 backdrop-blur-md text-center text-white font-notosans">
                 <div id="conditions" class="text-lg pb-2">Weather Conditions Name</div>
                 <div><img class="opacity-100" id="icon" src="./img/svg/partlycloudy.svg" alt=""></div>
                 <div id="temp" class="text-6xl">80&deg;F</div>
                 <div id="hilo" class="text-lg pb-2">Low: 58&deg; &#149; High: 92&deg;</div>
             </div>
-            <div id="alert" class="w-2/3 md:w-1/3 mx-auto p-4 my-4 rounded-lg text-center bg-yellow text-black text-lg"><img src="./img/svg/warning.svg">There is a weather alert for your area!</div>
-            <div id="smarmy" class="w-2/3 md:w-1/3 mx-auto p-4 my-4 rounded-lg text-center bg-black bg-opacity-50 backdrop-blur-md text-white text-lg">Smarmy Text</div>
+            <div id="alertbox" class="hidden w-2/3 lg:w-1/3 mx-auto p-4 my-4 rounded-lg text-center bg-yellow text-black text-lg">
+                <img class="w-8 h-8 mx-auto" src="./img/svg/warning.svg">
+                <div id="alert">There is a weather alert for your area!</div>
+            </div>
+            <div id="smarmy" class="w-2/3 lg:w-1/3 mx-auto p-4 my-4 rounded-lg text-center bg-black bg-opacity-50 backdrop-blur-md text-white text-lg">Smarmy Text</div>
         </main>      
     </div>
-
-<script>
-    updateDisplay("New York, NY", "nyc", "Sunny", "thunderstorm", 75, 110, 70, "No alerts", "It's a beautiful day in the neighborhood.");
-    updateDisplay("London, UK", "london", "Cloudy", "cloudy", 60, 70, 50, "No alerts", "It's a bit dreary today.");
-</script>
 
 </body>
 </html>
