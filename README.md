@@ -1,8 +1,8 @@
 # nypl
-Playing with the NYPL API.
+Initially I was going to do something with the NYPL Digital Collection API.  I didn't find anything inspiring in it -- odd, given my love of books.  Anyway, I then had an interesting idea for stuff to do with the weather.gov API, which was far more interesting.
 
 # end result
 I didn't find a great deal of inspiration in the NYPL API, surprisingly, but I was inspired to alter my route and build a weather conditions single-page that piggybacked off the geolocation API.  This is going to be fun as hell to put together.
 
-# focus
-In the interest of making this more fun and less of a nightmare for me, I'm opting to focus on imagery of the four cities the company exists in -- NYC, London, Sydney, and Indianapolis.
+# future updates
+* Getting the city-specific imagery updated.
