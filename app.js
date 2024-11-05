@@ -1,8 +1,10 @@
 // DATA
-let userLocation = {
-    latitude: null,
-    longitude: null
-};
+const localButton = document.getElementById("local");
+const nycButton = document.getElementById("nyc");
+const londonButton = document.getElementById("london");
+const sydneyButton = document.getElementById("sydney");
+const indianapolisButton = document.getElementById("indianapolis");
+
 
 // SET UP CURRENT CITIES
 
@@ -27,21 +29,6 @@ var nyc = {
     observationstation: "",
     placename: "New York, NY",
     citycode: "nyc",
-    conditions: "Fog",
-    iconfilename: "fog",
-    temp: 47,
-    high: 52,
-    low: 34,
-    alert: "Stuff!",
-    smarmy: "We got your weather right here!"    
-}
-
-var sydney = {
-    latitude: -33.8688,
-    longitude: 151.2093,
-    observationstation: "",
-    placename: "Sydney, NSW",
-    citycode: "sydney",
     conditions: "",
     iconfilename: "",
     temp: 0,
@@ -51,19 +38,34 @@ var sydney = {
     smarmy: ""    
 }
 
+var sydney = {
+    latitude: -33.8688,
+    longitude: 151.2093,
+    observationstation: "",
+    placename: "Sydney, NSW",
+    citycode: "sydney",
+    conditions: "Sunny",
+    iconfilename: "sunny",
+    temp: 105,
+    high: 200,
+    low: 104,
+    alert: null,
+    smarmy: "Now you know what it feels like to be creamated."    
+}
+
 var london = {
     latitude: 51.5072,
     longitude: -0.1276,
     observationstation: "",
     placename: "London, UK",
     citycode: "london",
-    conditions: "",
-    iconfilename: "",
-    temp: 0,
-    high: 0,
-    low: 0,
+    conditions: "Rain",
+    iconfilename: "rain",
+    temp: 48,
+    high: 49,
+    low: 44,
     alert: null,
-    smarmy: ""     
+    smarmy: "About normal, innit?"     
 }
 
 var indianapolis = {
@@ -81,32 +83,37 @@ var indianapolis = {
     smarmy: ""
 }    
 
-
-
 // FUNCTIONS
 
 function CelsiusToFahrenheit(c) {
     const F = (c * (9 / 5)) + 32;
-    return F;
+    return Math.round(F);
 }
+
+
 
 function updateDisplay(obj) {
     // update the display with the new data
     // use innerText instead of innerHTML to avoid XSS attacks
     var img = document.getElementById("icon");
-    img.src = "./img/svg/" + self.iconfilename + ".svg";
+    img.src = "./img/svg/" + obj.iconfilename + ".svg";
+
+    var bg = document.getElementById("backdrop");
+    var newImgURL = "url('./img/" + obj.citycode + "/" + obj.iconfilename + ".jpg')";
+    console.log("**** New Backdrop: " + newImgURL);
+    bg.style.backgroundImage = newImgURL;
     document.getElementById("location").innerText = obj.placename;
     document.getElementById("conditions").innerText = obj.conditions;
-    document.getElementById("temp").innerText = temp + "ºF";
+    document.getElementById("temp").innerText = obj.temp + "ºF";
     document.getElementById("hilo").innerText = "High: " + obj.high + "ºF • Low: " + obj.low + "ºF";
-    document.getElementById("alert").innerText = obj.alert;
+    document.getElementById("alert").innerText = "Alert functions disabled.";
     document.getElementById("smarmy").innerText = obj.smarmy;
 }
 
 function setError(city) {
     city.placename = "Geolocation Error";
     city.conditions = "Error!";
-    city.iconfilename = "sunny";
+    city.iconfilename = "no";
     city.citycode = "generic";
     city.temp = 0;
     city.high = 0;
@@ -115,49 +122,108 @@ function setError(city) {
     city.smarmy = "You're on your own!";
 }
 
-function completeCity(obj) {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            // record lat and long
-            if (obj.latitude == 0) {
-                obj.latitude = position.coords.latitude;
-                obj.longitude = position.coords.longitude;
-            }
-            // use weather.gov API to get the city name and observation station
-            if (obj.placename == "") {
-                fetch("https://api.weather.gov/points/" + obj.latitude + "," + obj.longitude)
-                .then(response => response.json())
-                .then(data => {
-                    obj.observationstation = data.properties.observationStations;
-                    obj.placename = data.properties.relativeLocation.properties.city + ", " + data.properties.relativeLocation.properties.state;
-                })
-                .catch(error => {
-                    obj.conditions = "Error!";
-                    obj.iconfilename = "sunny";
-                    obj.citycode = "generic";
-                    obj.temp = 0;
-                    obj.high = 0;
-                    obj.low = 0;
-                    obj.alert = "There was an error in retrieving the observation station ID.";
-                    obj.smarmy = "You're on your own!";
-                });
-            }
-            // use observation station to get current conditions
-          },
-          (error) => {
-            setError(obj);
-          }
-        );
-      } else {
-        setError(obj);
-      }
+function setSmarmy(city) {
+    // there are so many more of these you could add
+    city.smarmy = "It's a beautiful day in the neighborhood!";
+    if ((city.citycode == "sydney") && (city.temp > 100)) {
+        city.smarmy = "Now you know what it's like to feel like you've been creamated.";
+    }
+    if ((city.citycode == "nyc") && (city.temp < 32)) {
+        city.smarmy = "Gross."
+    }
+    if (city.citycode == "indianapolis") {
+        city.smarmy = "You're in Indy. Every day is the same, regardless of weather.";
+    }
 }
 
 
 
+function buildCity(obj) {
+    // Use GeolocationAPI to get the user's latitude and longitude
+    navigator.geolocation.getCurrentPosition(function(position) {
+        if (obj.latitude == 0) {
+            obj.latitude = position.coords.latitude;
+            obj.longitude = position.coords.longitude;
+        }
+        var placeURL = "https://api.weather.gov/points/" + obj.latitude + "," + obj.longitude;
+        console.log("Latitude: " + obj.latitude + " Longitude: " + obj.longitude);
+        console.log(placeURL);
 
-// SET UP SOME VARIABLES
-completeCity(current);
+        fetch(placeURL)
+            .then(response => response.json())
+            .then(data => {
+                console.log('OBJ.PLACENAME: ' + obj.placename);
+                if (obj.placename == "") {
+                    obj.placename = data.properties.relativeLocation.properties.city + ", " + data.properties.relativeLocation.properties.state;
+                }
+                obj.observationstation = data.properties.observationStations;
+                console.log(obj.observationstation);
 
-console.log(current);
+                return fetch(obj.observationstation);
+            })
+            .then(response => response.json())
+            .then(data => {
+                obj.station = data.features[0].id + "/observations/latest";
+                console.log(obj.station);
+
+                return fetch(obj.station);
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Process the observation data here
+                console.log(data);
+                obj.temp = CelsiusToFahrenheit(data.properties.temperature.value);
+                if (data.properties.maxTemperatureLast24Hours.value == null) {
+                    obj.high = "--";
+                } else {
+                    obj.high = CelsiusToFahrenheit(data.properties.maxTemperatureLast24Hours.value);
+                }
+                if (data.properties.minTemperatureLast24Hours.value == null) {
+                    obj.low = "--";
+                } else {
+                    obj.low = CelsiusToFahrenheit(data.properties.minTemperatureLast24Hours.value);
+                }
+                obj.conditions = data.properties.textDescription;
+                obj.iconfilename = data.properties.textDescription.replace(" ", "").toLowerCase();
+                console.log("Icon Name, Computed: " + obj.iconfilename);
+                setSmarmy(obj);
+            })
+            .catch(error => console.error('Error fetching data:', error));
+    }, function(error) {
+        console.error('Error getting geolocation:', error);
+    });
+} // end buildCity
+
+
+buildCity(current);
+buildCity(nyc);
+buildCity(indianapolis);
+updateDisplay(london);
+
+// EVENT LISTENERS
+
+localButton.addEventListener("click", function() {
+    console.log("Local Clicked");
+    updateDisplay(current);
+});
+
+nycButton.addEventListener("click", function() {
+    console.log("NYC Clicked");
+    updateDisplay(nyc);
+});
+
+londonButton.addEventListener("click", function() {
+    console.log("London Clicked");
+    updateDisplay(london);
+});
+
+sydneyButton.addEventListener("click", function() {
+    console.log("Sydney Clicked");
+    updateDisplay(sydney);
+});
+
+indianapolisButton.addEventListener("click", function() {
+    console.log("Indianapolis Clicked");
+    updateDisplay(indianapolis);
+});
+

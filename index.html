@@ -6,7 +6,7 @@
     <title>Weather Conditions</title>
     <!-- JAVASCRIPT -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="app.js"></script>
+    
     <!-- CSS, LOCAL PLUS  -->
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.tailwindcss.com"></script>
@@ -21,27 +21,27 @@
     <div id="backdrop" class="m-0 h-screen w-full font-notosans dark:grayscale" style="background-image: url('./img/generic/sunny.jpg');">
         <nav>
             <div class="container mx-auto flex justify-between items-center">
-                <a href="#" id="yours" class="mt-2 p-4 inline-block text-white font-bold rounded-md hover:bg-black hover:bg-opacity-30">Your Location</a>
+                <a href="#" id="local" class="mt-2 p-4 inline-block text-white font-bold rounded-md hover:bg-black hover:bg-opacity-30">Local</a>
                 <a href="#" id="nyc" class="mt-2 p-4 inline-block text-white font-bold rounded-md hover:bg-black hover:bg-opacity-30">NYC</a>
                 <a href="#" id="london" class="mt-2 p-4 inline-block text-white font-bold rounded-md hover:bg-black hover:bg-opacity-30">London</a>
                 <a href="#" id="sydney" class="mt-2 p-4 inline-block text-white font-bold rounded-md hover:bg-black hover:bg-opacity-30">Sydney</a>
                 <a href="#" id="indianapolis" class="mt-2 p-4 inline-block text-white font-bold rounded-md hover:bg-black hover:bg-opacity-30">Indianapolis</a>
         </nav>
         <main>
-            <div id="location" class="w-2/3 lg:w-1/3 mx-auto p-4 my-4 bg-black rounded-lg bg-opacity-50 backdrop-blur-md text-center text-white text-2xl font-notosans">Location Name</div>
+            <div id="location" class="w-2/3 lg:w-1/3 mx-auto p-4 my-4 bg-black rounded-lg bg-opacity-50 backdrop-blur-md text-center text-white text-2xl font-notosans">--</div>
             <div class="w-2/3 lg:w-1/3 mx-auto p-4 my-4 bg-black rounded-lg bg-opacity-50 backdrop-blur-md text-center text-white font-notosans">
-                <div id="conditions" class="text-lg pb-2">Weather Conditions Name</div>
+                <div id="conditions" class="text-lg pb-2">--</div>
                 <div><img class="opacity-100" id="icon" src="./img/svg/partlycloudy.svg" alt=""></div>
-                <div id="temp" class="text-6xl">80&deg;F</div>
-                <div id="hilo" class="text-lg pb-2">Low: 58&deg; &#149; High: 92&deg;</div>
+                <div id="temp" class="text-6xl">--</div>
+                <div id="hilo" class="text-lg pb-2">Low: --&deg; &#149; High: --&deg;</div>
             </div>
             <div id="alertbox" class="hidden w-2/3 lg:w-1/3 mx-auto p-4 my-4 rounded-lg text-center bg-yellow text-black text-lg">
                 <img class="w-8 h-8 mx-auto" src="./img/svg/warning.svg">
                 <div id="alert">There is a weather alert for your area!</div>
             </div>
-            <div id="smarmy" class="w-2/3 lg:w-1/3 mx-auto p-4 my-4 rounded-lg text-center bg-black bg-opacity-50 backdrop-blur-md text-white text-lg">Smarmy Text</div>
+            <div id="smarmy" class="w-2/3 lg:w-1/3 mx-auto p-4 my-4 rounded-lg text-center bg-black bg-opacity-50 backdrop-blur-md text-white text-lg"> </div>
         </main>      
     </div>
-
+    <script src="app.js"></script>
 </body>
 </html>
