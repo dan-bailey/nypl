@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Conditions</title>
+    <!-- JAVASCRIPT -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="   crossorigin="anonymous"></script>
+    <script src="app.js"></script>
+    <!-- CSS, LOCAL PLUS  -->
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- FONTAWESOME -->
+    <script src="https://kit.fontawesome.com/e5141475d1.js" crossorigin="anonymous"></script>
+
+    <!-- GOOGLE WEB FONT -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <div id="backdrop" class="m-0 h-screen w-full font-notosans" style="background-image: url('./img/generic/sunny.jpg');">
+        <nav>
+            <div class="container mx-auto flex justify-between items-center">
+                <a href="#" id="yours" class="mt-2 p-4 inline-block text-white font-bold rounded-md hover:bg-black hover:opacity-40 hover:underline">Your Location</a>
+                <a href="#" id="nyc" class="mt-2 p-4 inline-block text-white font-bold rounded-md hover:bg-black hover:opacity-40 hover:underline">NYC</a>
+                <a href="#" id="london" class="mt-2 p-4 inline-block text-white font-bold rounded-md hover:bg-black hover:opacity-40 hover:underline">London</a>
+                <a href="#" id="sydney" class="mt-2 p-4 inline-block text-white font-bold rounded-md hover:bg-black hover:opacity-40 hover:underline">Sydney</a>
+                <a href="#" id="indianapolis" class="mt-2 p-4 inline-block text-white font-bold rounded-md hover:bg-black hover:opacity-40 hover:underline">Indianapolis</a>
+        </nav>
+        <main>
+            <div class="w-1/3 mx-auto p-4 my-4 bg-black rounded-lg opacity-30 text-center text-white text-2xl font-notosans">Location Name</div>
+            <div class="w-1/3 mx-auto p-4 my-4 bg-black rounded-lg opacity-30 text-center text-white font-notosans">
+                <div class="text-lg pb-2">Weather Conditions Name</div>
+                <div class=""><img src="./img/svg/thunderstorm.svg" alt=""></div>
+                <div class="text-6xl">80&deg; F</div>
+            </div>
+        </main>      
+    </div>
+</body>
+</html>
